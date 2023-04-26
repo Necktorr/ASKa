@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./num2t4ru-master"
+    ]
+}
