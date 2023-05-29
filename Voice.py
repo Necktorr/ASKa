@@ -7,6 +7,7 @@ import datetime
 from num2t4ru import num2text
 import webbrowser
 import random
+from yaweather import UnitedKingdom, YaWeather
 
 class Voice_Module():
     def __init__(self) -> None:
@@ -77,8 +78,13 @@ class Voice_Module():
             url = "https://google.com/search?q="
             webbrowser.get().open(url)
         elif cmd == 'weather':
-            url = "https://yandex.ru/pogoda/moscow?lat=55.755863&lon=37.6177"
-            webbrowser.get().open(url)
+            y = YaWeather(api_key='ab6df7ab-f952-497a-98fe-93d3ef1d0b34')
+            res = y.forecast(UnitedKingdom.London)
+
+            print(f'Now: {res.fact.temp} °C, feels like {res.fact.feels_like} °C')
+            print(f'Condition: {res.fact.condition}')
+            # url = "https://yandex.ru/pogoda/moscow?lat=55.755863&lon=37.6177"
+            # webbrowser.get().open(url)
         elif cmd == 'joke' and login:
             jokes = ['Как смеются программисты? ... ехе ехе ехе',
                     'ЭсКьюЭль запрос заходит в бар, подходит к двум столам и спрашивает .. «м+ожно присоединиться?»',
