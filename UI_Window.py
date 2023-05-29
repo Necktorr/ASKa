@@ -3,10 +3,11 @@ from PyQt6.QtWidgets import (QWidget, QLabel, QLineEdit,
 from PyQt6.QtGui import QFont
 
 import sys, datetime, Voice
-import Voice
+import stt
+
 
 class ASKA_UI(QWidget):
-    def __init__(self, voice_model: Voice.Voice_Module()):
+    def __init__(self, voice_model = Voice.Voice_Module()):
         super().__init__()
         self.accept_micro = True
 
@@ -67,4 +68,3 @@ def start_ui():
 
 if __name__ == '__main__':
     start_ui()
-    

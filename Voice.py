@@ -97,7 +97,7 @@ class Voice_Module():
 
     def stop(self):
         self.stt_module.stop_listen()
-        
+
 def start_voice():
     vm = Voice_Module()
     vm.start()
