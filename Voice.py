@@ -25,7 +25,7 @@ class Voice_Module():
     def va_respond(self, voice: str):
         print(voice)
         if voice.startswith(config.VA_IDEN):
-            self.va_com(self, voice, login = True)
+            self.va_com(voice, login = True)
             
             
         elif voice.startswith(config.VA_ALIAS):
@@ -77,6 +77,7 @@ class Voice_Module():
         elif cmd == 'browser':
             url = "https://google.com/search?q="
             webbrowser.get().open(url)
+            
         elif cmd == 'weather':
             y = YaWeather(api_key='ab6df7ab-f952-497a-98fe-93d3ef1d0b34')
             res = y.forecast(UnitedKingdom.London)

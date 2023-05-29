@@ -1,10 +1,16 @@
-VA_NAME = 'Аска'
+import configparser
+
+config = configparser.ConfigParser()
+config.sections()
+config.read('config.ini', encoding='utf-8')
+
+VA_NAME = config['DEFAULT']['VA_NAME']
 
 VA_VER = "1.0"
 
 VA_ALIAS = ('аска')
 
-VA_IDEN = ('аска логин')
+VA_IDEN = tuple(config['DEFAULT']['VA_IDEN'])
 
 VA_TBR = ('скажи', 'покажи', 'ответь', 'произнеси', 'расскажи', 'сколько', 'открой')
 

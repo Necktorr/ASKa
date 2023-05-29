@@ -2,16 +2,19 @@ from PyQt6.QtWidgets import (QWidget, QLabel, QLineEdit,
     QPushButton, QApplication)
 from PyQt6.QtGui import QFont
 
-import sys, datetime, Voice
+import sys, datetime
 import stt
-import weather
+from modules.weather import get_weather
+import configparser
+
+config = configparser.ConfigParser()
+config.sections()
+config.read('config.ini', encoding='utf-8')
 
 class ASKA_UI(QWidget):
-    def __init__(self, voice_model = Voice.Voice_Module()):
+    def __init__(self):
         super().__init__()
         self.accept_micro = True
-
-        self.voice_model = voice_model
         
         self.initUI()
         
@@ -20,7 +23,7 @@ class ASKA_UI(QWidget):
         self.lablel_1 = QLabel(f'Время сейчас: {now.strftime("%H:%M:%S")}', self)
         self.lablel_1.setGeometry(10, 0, 200, 15)
 
-        # self.lablel_2 = QLabel(f'Погода: = {weather.f1, weather.f2}', self)
+        # self.lablel_2 = QLabel(f'Погода: = {get_weather()}', self)
         # self.lablel_2.setGeometry(10, 20, 200, 15)
 
         self.lablel_3 = QLabel(f'Дата: {now.strftime("%d-%m-%Y")}', self)
@@ -36,10 +39,11 @@ class ASKA_UI(QWidget):
 
         self.input_secret_key = QLineEdit(self)
         self.input_secret_key.setGeometry(10, 110, 150, 20)
+        self.input_secret_key.setText(config['DEFAULT']['VA_IDEN'])
 
-        self.btn_save = QPushButton('Выключить', self)
+        self.btn_save = QPushButton('Сохранить', self)
         self.btn_save.resize(self.btn.sizeHint())
-        # self.btn_save.clicked.connect(self.switch_micro)
+        self.btn_save.clicked.connect(self.save_button)
         self.btn_save.move(10, 130)
 
         self.setGeometry(500, 500, 300, 160)
@@ -51,13 +55,19 @@ class ASKA_UI(QWidget):
             self.btn.setText("Включить")
             self.lablel_4.setText(f'Микрофон: {self.accept_micro}')
             
-            self.voice_model.stop()
             
         else:
             self.accept_micro = True
             self.btn.setText("Выключить")
             self.lablel_4.setText(f'Микрофон: {self.accept_micro}')
-            self.voice_model.start()
+            
+    def save_button(self):
+        txt = self.input_secret_key.text()
+        
+        config['DEFAULT']['VA_IDEN'] = txt
+        with open('config.ini', 'w', encoding='utf-8') as configfile:
+            config.write(configfile)
+        
 
 def start_ui():
     app = QApplication(sys.argv)

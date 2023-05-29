@@ -1,10 +1,10 @@
-from yaweather import UnitedKingdom, YaWeather
+from yaweather import Russia, YaWeather
 
 
-y = YaWeather(api_key='ab6df7ab-f952-497a-98fe-93d3ef1d0b34')
-res = y.forecast(UnitedKingdom.London)
+def get_weather():
+    y = YaWeather(api_key='ab6df7ab-f952-497a-98fe-93d3ef1d0b34')
+    res = y.forecast(Russia.Moscow, lang="ru_RU")
 
+    return f'Сейчас: {res.fact.temp} градусов, ощущается как {res.fact.feels_like} градусов' #, f'Небо: {res.fact.condition}'
 
-f1 = (f'Now: {res.fact.temp} °C, feels like {res.fact.feels_like} °C')
-f2 = (f'Condition: {res.fact.condition}')
-print (f1, f2)
+# print(get_weather())
