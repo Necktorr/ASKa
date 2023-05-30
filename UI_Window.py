@@ -6,6 +6,7 @@ import sys, datetime
 import stt
 from modules.weather import get_weather
 import configparser
+import subprocess
 
 config = configparser.ConfigParser()
 config.sections()
@@ -15,6 +16,8 @@ class ASKA_UI(QWidget):
     def __init__(self):
         super().__init__()
         self.accept_micro = True
+        
+        self.voice_module = subprocess.Popen("python.exe Voice.py")
         
         self.initUI()
         
@@ -54,19 +57,27 @@ class ASKA_UI(QWidget):
             self.accept_micro = False
             self.btn.setText("Включить")
             self.lablel_4.setText(f'Микрофон: {self.accept_micro}')
-            
+            self.voice_module.kill()
             
         else:
             self.accept_micro = True
             self.btn.setText("Выключить")
             self.lablel_4.setText(f'Микрофон: {self.accept_micro}')
+            self.voice_module = subprocess.Popen("python.exe Voice.py")
             
     def save_button(self):
         txt = self.input_secret_key.text()
+        self.voice_module.kill()
         
         config['DEFAULT']['VA_IDEN'] = txt
         with open('config.ini', 'w', encoding='utf-8') as configfile:
             config.write(configfile)
+        
+        self.voice_module = subprocess.Popen("python.exe Voice.py")
+    
+    def closeEvent(self, event):
+        self.voice_module.kill()
+        event.accept()
         
 
 def start_ui():

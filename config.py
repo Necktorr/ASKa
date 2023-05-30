@@ -10,7 +10,7 @@ VA_VER = "1.0"
 
 VA_ALIAS = ('аска')
 
-VA_IDEN = tuple(config['DEFAULT']['VA_IDEN'])
+VA_IDEN = config['DEFAULT']['VA_IDEN']
 
 VA_TBR = ('скажи', 'покажи', 'ответь', 'произнеси', 'расскажи', 'сколько', 'открой')
 

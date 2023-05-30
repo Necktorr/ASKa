@@ -25,9 +25,8 @@ class Voice_Module():
                     
     def va_respond(self, voice: str):
         print(voice)
-        if voice.startswith(config.VA_IDEN):
+        if voice.startswith(config.VA_ALIAS) and config.VA_IDEN in voice:
             self.va_com(voice, login = True)
-            
             
         elif voice.startswith(config.VA_ALIAS):
             self.va_com(voice, login = False)
@@ -61,6 +60,7 @@ class Voice_Module():
 
 
     def execute_cmd(self, cmd: str, login):
+        print('Сейчас стоит логин: ', login)
         if cmd == 'help':
             # help
             text = "Я умею: ..."
@@ -69,7 +69,7 @@ class Voice_Module():
             text += "и открывать браузер"
             text += "показывать погоду"
             tts.va_speak(text)
-            pass
+            
         elif cmd == 'ctime':
             # current time
             now = datetime.datetime.now()
@@ -88,11 +88,6 @@ class Voice_Module():
                     'Программист это машина для преобразования кофе в код']
 
             tts.va_speak(random.choice(jokes))
-
-        #elif cmd == 'open_browser':
-            #webbrowser.open('https://vk.com/', new=2)
-            #chrome_path = 'C:\Program Files\Google\Chrome\Application %s'
-            #webbrowser.get(chrome_path).open("http://python.org")
 
 
     def start(self):
