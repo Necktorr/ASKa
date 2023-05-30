@@ -8,6 +8,7 @@ from num2t4ru import num2text
 import webbrowser
 import random
 from yaweather import UnitedKingdom, YaWeather
+from modules.weather import get_weather
 
 class Voice_Module():
     def __init__(self) -> None:
@@ -66,6 +67,7 @@ class Voice_Module():
             text += "произносить время ..."
             text += "рассказывать анекдоты ..."
             text += "и открывать браузер"
+            text += "показывать погоду"
             tts.va_speak(text)
             pass
         elif cmd == 'ctime':
@@ -74,19 +76,13 @@ class Voice_Module():
             text = "Сейчас " + num2text(now.hour) + "часов " + num2text(now.minute)+"минут"
             tts.va_speak(text)
             
-        elif cmd == 'browser':
+        elif cmd == 'browser' and login:
             url = "https://google.com/search?q="
             webbrowser.get().open(url)
             
         elif cmd == 'weather':
-            y = YaWeather(api_key='ab6df7ab-f952-497a-98fe-93d3ef1d0b34')
-            res = y.forecast(UnitedKingdom.London)
-
-            print(f'Now: {res.fact.temp} °C, feels like {res.fact.feels_like} °C')
-            print(f'Condition: {res.fact.condition}')
-            # url = "https://yandex.ru/pogoda/moscow?lat=55.755863&lon=37.6177"
-            # webbrowser.get().open(url)
-        elif cmd == 'joke' and login:
+            print(get_weather())
+        elif cmd == 'joke':
             jokes = ['Как смеются программисты? ... ехе ехе ехе',
                     'ЭсКьюЭль запрос заходит в бар, подходит к двум столам и спрашивает .. «м+ожно присоединиться?»',
                     'Программист это машина для преобразования кофе в код']
