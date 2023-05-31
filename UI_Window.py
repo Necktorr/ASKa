@@ -26,9 +26,6 @@ class ASKA_UI(QWidget):
         self.lablel_1 = QLabel(f'Время сейчас: {now.strftime("%H:%M:%S")}', self)
         self.lablel_1.setGeometry(10, 0, 200, 15)
 
-        # self.lablel_2 = QLabel(f'Погода: = {get_weather()}', self)
-        # self.lablel_2.setGeometry(10, 20, 200, 15)
-
         self.lablel_3 = QLabel(f'Дата: {now.strftime("%d-%m-%Y")}', self)
         self.lablel_3.setGeometry(10, 40, 200, 15)
 
