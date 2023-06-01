@@ -70,8 +70,7 @@ class Voice_Module():
             text += "показывать погоду"
             tts.va_speak(text)
             
-        elif cmd == 'ctime':
-            # current time
+        elif cmd == 'ctime':    
             now = datetime.datetime.now()
             text = "Сейчас " + num2text(now.hour) + "часов " + num2text(now.minute)+"минут"
             tts.va_speak(text)
