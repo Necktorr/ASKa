@@ -2,7 +2,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+model_small/*
+.venv
+num2t4ru-master/
 # C extensions
 *.so
 
